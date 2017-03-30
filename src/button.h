@@ -1,8 +1,7 @@
 #ifndef BUTTON_H_
 #define BUTTON_H_
-#include <stdio.h>
+
 #include <stdint.h>
-#include <stdlib.h>
 #include "Arduino.h"
 // Bit shortcuts
 #define BUTTON_IS_ACTIVE 1
