@@ -6,6 +6,7 @@
 
 #define S_STATE_IS_ACTIVE 1
 #define S_STATE_IS_HI 2
+#define S_STATE_IS_CONST 4
 
 typedef struct {
   /*

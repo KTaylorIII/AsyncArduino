@@ -3,9 +3,12 @@
 
 #include <stdint.h>
 #include "Arduino.h"
+
 // Bit shortcuts
 #define BUTTON_IS_ACTIVE 1
 #define BUTTON_IS_HIGH 2
+
+// Button struct declaration & definition
 typedef struct{
   /*
    * b_l_trigger : Arduino time since the button was last pressed or
@@ -24,20 +27,24 @@ typedef struct{
   uint8_t b_st; // Button state
   
 }button;
+
 /*  button_init - Initializes the button structure for further use
-    button_start - Sets IS_ACTIVE bit to 1, allowing button functions
+    button_listen - Sets IS_ACTIVE bit of btn struct's state to 1, allowing button functions
     to listen for user events
-    on_button_press - Executes the callback handle upon a button
-    press and sets b_l_trigger to the current clock value
+    
+    button_press - Returns true if button->b_st is not IS_HIGH, 
+    the time elapsed since last trigger exceeds the delay interval,
+    and the button is active
+    
     on_button_h_or_r - Executes one of two possible callbacks
     depending on whether a button is held down or released after an
     interval specified by b_l_trigger. b_l_trigger also updates here
-    button_stop - Sets IS_ACTIVE bit
+    button_stop - Sets IS_ACTIVE bit to false
  */
+ 
 #ifdef __cplusplus
 extern "C"{
 #endif
-
 void button_init(button* btn, const uint8_t pin, const uint32_t pressDelay);
 void button_listen(button* btn);
 uint8_t button_press(button* btn, uint32_t* clk);
