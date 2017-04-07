@@ -36,7 +36,6 @@ void sigl_process(sigl *sig, const uint32_t *clk){
 
 void sigl_stop(sigl *sig){
   digitalWrite(sig->s_pin, LOW);
-  sig->s_state = sig->s_state & ~S_STATE_IS_HI;
-  sig->s_state = sig->s_state & ~S_STATE_IS_ACTIVE;
+  sig->s_state = sig->s_state & ~(S_STATE_IS_HI|S_STATE_IS_ACTIVE);
   sig->s_last_trigger = 0;
 }
