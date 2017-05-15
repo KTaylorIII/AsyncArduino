@@ -20,7 +20,7 @@ void sigl_process(sigl *sig, const uint32_t *clk){
                 // then disable pin and reverse pin state
                 sig->s_last_trigger = *clk;
                 digitalWrite(sig->s_pin, LOW);
-                sig->s_state = sig->s_state & ~S_STATE_IS_HI;
+                sig->s_state ^= S_STATE_IS_HI;
             }
         }
         else{ // otherwise, if lo
@@ -28,7 +28,7 @@ void sigl_process(sigl *sig, const uint32_t *clk){
                 // .. and delta t yields/exceeds active lo duration
                 sig->s_last_trigger = *clk;
                 digitalWrite(sig->s_pin, HIGH);
-                sig->s_state = sig->s_state | S_STATE_IS_HI;
+                sig->s_state ^= S_STATE_IS_HI;
             }
         }
     }
